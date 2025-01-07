@@ -1,6 +1,7 @@
 {
   "name": "test-action",
   "version": "1.0.0",
+  "type": "module",
   "main": "app.js",
   "dependencies": {
     "node-fetch": "^3.3.0"
