@@ -1,3 +1,2 @@
 [functions]
 node_bundler = "esbuild" # Ensure proper bundling
-node_version = "16"
