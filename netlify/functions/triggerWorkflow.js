@@ -1,8 +1,8 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch'); // CommonJS import for node-fetch@2
 
-export async function handler(event, context) {
+exports.handler = async (event, context) => {
     try {
-        const GITHUB_PAT = process.env.GITHUB_PAT; // Access the PAT securely
+        const GITHUB_PAT = process.env.GITHUB_PAT; // Use Netlify's environment variable
         const response = await fetch('https://api.github.com/repos/RebelPilotTyler/test-action/dispatches', {
             method: 'POST',
             headers: {
@@ -11,7 +11,7 @@ export async function handler(event, context) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                event_type: 'update-json', // Must match the workflow
+                event_type: 'update-json',
             }),
         });
 
@@ -33,4 +33,4 @@ export async function handler(event, context) {
             body: JSON.stringify({ message: 'Server error', error }),
         };
     }
-}
+};
