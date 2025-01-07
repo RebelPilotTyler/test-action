@@ -1,8 +1,8 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async (event, context) => {
+export async function handler(event, context) {
     try {
-        const GITHUB_PAT = process.env.GITHUB_PAT; // Securely access your GitHub PAT
+        const GITHUB_PAT = process.env.GITHUB_PAT; // Access the PAT securely
         const response = await fetch('https://api.github.com/repos/RebelPilotTyler/test-action/dispatches', {
             method: 'POST',
             headers: {
@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                event_type: 'update-json', // This must match your GitHub Actions workflow
+                event_type: 'update-json', // Must match the workflow
             }),
         });
 
@@ -33,4 +33,4 @@ exports.handler = async (event, context) => {
             body: JSON.stringify({ message: 'Server error', error }),
         };
     }
-};
+}
