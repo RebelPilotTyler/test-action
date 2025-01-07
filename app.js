@@ -1,25 +1,18 @@
 document.getElementById('increment-btn').addEventListener('click', async () => {
     try {
-        const response = await fetch('https://api.github.com/repos/RebelPilotTyler/test-action/dispatches', {
+        const response = await fetch('/.netlify/functions/triggerWorkflow', {
             method: 'POST',
-            headers: {
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                event_type: 'update-json',
-            }),
         });
 
         if (response.ok) {
-            alert('Request sent successfully!');
+            alert('Workflow triggered successfully!');
         } else {
-            const errorData = await response.json(); // Safely handle JSON parsing errors
+            const errorData = await response.json();
             console.error('Error:', errorData);
-            alert('Error triggering GitHub Actions.');
+            alert('Error triggering workflow.');
         }
     } catch (error) {
-        console.error('Unexpected Error:', error);
+        console.error('Unexpected error:', error);
         alert('Unexpected error occurred.');
     }
 });
