@@ -2,7 +2,6 @@ document.getElementById('increment-btn').addEventListener('click', async () => {
     const response = await fetch('https://api.github.com/repos/RebelPilotTyler/test-action/dispatches', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${{ secrets.PAT_TOKEN }}`, // Replace <YOUR_PAT> with your token or use secrets
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json',
         },
@@ -12,8 +11,10 @@ document.getElementById('increment-btn').addEventListener('click', async () => {
     });
 
     if (response.ok) {
-        alert('Counter updated!');
+        alert('Request sent successfully!');
     } else {
-        alert('Error updating counter.');
+        const errorData = await response.json();
+        console.error('Error:', errorData);
+        alert('Error triggering GitHub Actions.');
     }
 });
